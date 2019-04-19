@@ -10,6 +10,6 @@ pipenv run asteroids.py
 ```
 ### Manual installation:
 ```bash
-install pygame
+pip install pygame
 python asteroids.py
 ```
