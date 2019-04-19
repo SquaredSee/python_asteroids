@@ -5,9 +5,8 @@
 import pygame
 from pygame.locals import *
 
-from util import COLOR
-from engine import FPS, Entity, UP, DOWN, LEFT, RIGHT
-# from player import Player
+from engine import Entity, COLOR, FPS
+from player import Player
 
 import logging
 log = logging.getLogger('asteroids')
@@ -27,7 +26,7 @@ if __name__ == "__main__":
     background.fill((0, 0, 0))
 
     entities = pygame.sprite.Group()
-    char = Entity((18, 18), (250, 250))
+    char = Player((250, 250))
     entities.add(char)
     x = 50
     y = 50
@@ -37,17 +36,6 @@ if __name__ == "__main__":
         for event in pygame.event.get():
             if event.type == QUIT:
                 raise SystemExit('Thanks for playing!')
-
-        keys = pygame.key.get_pressed()
-
-        if keys[pygame.K_LEFT]:
-            char.velocity += LEFT
-        if keys[pygame.K_RIGHT]:
-            char.velocity += RIGHT
-        if keys[pygame.K_UP]:
-            char.velocity += DOWN
-        if keys[pygame.K_DOWN]:
-            char.velocity += UP
 
         screen.blit(background, (0, 0))
         entities.update()

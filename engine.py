@@ -1,4 +1,6 @@
-"""engine.py: Basic Entity movement and other physics calculations"""
+"""engine.py: Basic Entity movement and global constants"""
+
+from types import SimpleNamespace
 
 from pygame import Surface
 from pygame.math import Vector2 as Vector
@@ -6,12 +8,16 @@ from pygame.sprite import Sprite
 from pygame.transform import rotate
 
 FPS = 60
+SCREEN_WIDTH = 600
+SCREEN_HEIGHT = 600
+SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
 
-# Direction unit vectors
-UP = Vector(0, 1)
-DOWN = Vector(0, -1)
-LEFT = Vector(-1, 0)
-RIGHT = Vector(1, 0)
+# Use a SimpleNamespace to allow for COLOR.NAME accessing
+COLOR = SimpleNamespace(
+    BLACK=(0, 0, 0),
+    WHITE=(255, 255, 255),
+    GREY=(50, 50, 50)
+)
 
 
 class Entity(Sprite):
@@ -45,6 +51,15 @@ class Entity(Sprite):
 
     def move(self, pos=Vector(0, 0)):
         """Moves the position to the Vector2 given"""
+        # Wrap around the screen
+        if pos.x > SCREEN_WIDTH:
+            pos.x = 0
+        elif pos.x < 0:
+            pos.x = SCREEN_WIDTH
+        if pos.y > SCREEN_HEIGHT:
+            pos.y = 0
+        elif pos.y < 0:
+            pos.y = SCREEN_HEIGHT
         self.position = pos
         # Set the center of the rect to the position
         self.rect.center = self.position
