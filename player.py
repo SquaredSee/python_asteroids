@@ -14,10 +14,13 @@ class Player(Entity):
 
         # Acceleration vector that will be rotated and added to velocity
         self.acceleration = Vector(0, -0.2)
-        self.max_acceleration = 2
 
-        self.vel_slow = 2
-        self.accel_slow = 0.1
+        # controls how quickly the ship slows down
+        self.slow_speed = 0.1
+
+        # controls how quickly the ship rotates and slows its rotation
+        self.rotate_increment = 0.5
+        self.slow_rotation = self.rotate_increment / 2
 
         # Draws an arrow facing in the direction of angle to serve as the ship
         size = self.image.get_size()
@@ -32,10 +35,22 @@ class Player(Entity):
         """Calculates the next angle in the rotation"""
         # Slow the rotation
         if self.rotation_speed > 0:
-            self.rotation_speed -= .5
+            self.rotation_speed -= self.slow_rotation
         elif self.rotation_speed < 0:
-            self.rotation_speed += .5
+            self.rotation_speed += self.slow_rotation
         return Entity.calc_rotation(self)
+
+    def calc_position(self):
+        # simulate friction to slow the ship
+        friction = self.velocity.length() - self.slow_speed
+        if friction <= 0:
+            friction = 0
+        try:
+            self.velocity.scale_to_length(friction)
+        except ValueError as _:
+            # Fixes vector scaling issues
+            self.velocity = Vector()
+        return Entity.calc_position(self)
 
     def rotate(self, angle=0):
         self.acceleration.rotate_ip(self.rotation_speed)
@@ -45,17 +60,10 @@ class Player(Entity):
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_LEFT]:
-            self.rotation_speed -= 1
+            self.rotation_speed -= self.rotate_increment
         if keys[pygame.K_RIGHT]:
-            self.rotation_speed += 1
+            self.rotation_speed += self.rotate_increment
         if keys[pygame.K_UP]:
             self.velocity += self.acceleration
-        if keys[pygame.K_DOWN]:
-            pass
-            # new_velocity = self.velocity - self.acceleration
-            # (_, angle) = new_velocity.as_polar()
-            # if abs(self.angle - angle) > 175:
-            #     new_velocity.scale_to_length(0)
-            # self.velocity = new_velocity
 
         Entity.update(self)
