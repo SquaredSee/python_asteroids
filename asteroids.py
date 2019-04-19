@@ -8,9 +8,6 @@ from pygame.locals import *
 from engine import Entity, COLOR, FPS
 from player import Player
 
-import logging
-log = logging.getLogger('asteroids')
-
 
 if __name__ == "__main__":
     pygame.init()
@@ -26,10 +23,9 @@ if __name__ == "__main__":
     background.fill((0, 0, 0))
 
     entities = pygame.sprite.Group()
+
     char = Player((250, 250))
     entities.add(char)
-    x = 50
-    y = 50
 
     # Event loop .
     while True:
