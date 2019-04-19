@@ -1,13 +1,9 @@
 """engine.py: Basic Entity movement and other physics calculations"""
 
-
-
 from pygame import Surface
 from pygame.math import Vector2 as Vector
 from pygame.sprite import Sprite
 from pygame.transform import rotate
-
-from util import COLOR
 
 FPS = 60
 
@@ -34,7 +30,7 @@ class Entity(Sprite):
         self.angle = 0
         self.rotation_speed = 0
         self.slow_speed = 1
-        self.max_velocity= 10
+        self.max_velocity = 10
 
     def calc_position(self):
         """Calculates the next position based on velocity"""
