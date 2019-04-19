@@ -6,7 +6,7 @@ A python implementation of asteroids written in pygame
 ### For [pipenv](https://pipenv.readthedocs.io/):
 ```bash
 pipenv install
-pipenv run asteroids.py
+pipenv run python asteroids.py
 ```
 ### Manual installation:
 ```bash
