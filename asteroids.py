@@ -20,7 +20,7 @@ if __name__ == "__main__":
     # Define the background for drawing
     background = pygame.Surface(screen.get_size())
     background = background.convert()
-    background.fill((0, 0, 0))
+    background.fill(COLOR.BLACK)
 
     player = Player()
 
