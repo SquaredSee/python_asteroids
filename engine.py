@@ -27,7 +27,6 @@ class Entity(Sprite):
         Sprite.__init__(self)
 
         self.image = Surface(size).convert()
-        # self.image.fill(COLOR.WHITE)
         self.orig_img = self.image
         self.rect = self.image.get_rect(center=pos)
 
@@ -35,7 +34,6 @@ class Entity(Sprite):
         self.velocity = Vector(0, 0)
         self.angle = 0
         self.rotation_speed = 0
-        self.slow_speed = 1
         self.max_velocity = 10
 
     def calc_position(self):
