@@ -15,17 +15,14 @@ if __name__ == "__main__":
     clock = pygame.time.Clock()
 
     screen = pygame.display.set_mode(SCREEN_SIZE)
-    pygame.display.set_caption('Asteroids')
+    pygame.display.set_caption('Python Asteroids')
 
-    # Define the background for drawing later
+    # Define the background for drawing
     background = pygame.Surface(screen.get_size())
     background = background.convert()
     background.fill((0, 0, 0))
 
-    entities = pygame.sprite.Group()
-
-    char = Player()
-    entities.add(char)
+    player = Player()
 
     # Event loop .
     while True:
@@ -33,9 +30,15 @@ if __name__ == "__main__":
             if event.type == QUIT:
                 raise SystemExit('Thanks for playing!')
 
+        # Draw the background to the screen
         screen.blit(background, (0, 0))
-        entities.update()
-        entities.draw(screen)
+
+        # Update all entities and draw them
+        Entity.group.update()
+        Entity.group.draw(screen)
+
+        # Display what has been drawn
         pygame.display.update()
 
+        # Advance the clock
         clock.tick(FPS)

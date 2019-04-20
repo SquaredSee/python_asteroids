@@ -3,8 +3,16 @@
 import pygame
 # from pygame.locals import *
 from pygame.math import Vector2 as Vector
+from pygame.sprite import Group as SpriteGroup
 
 from engine import Entity, COLOR, SCREEN_WIDTH, SCREEN_HEIGHT
+
+
+class Laser(Entity):
+    """Entity for the projectiles the Player fires"""
+
+    def __init__(self, pos=(0, 0), angle=0):
+        pass
 
 
 class Player(Entity):
@@ -23,6 +31,8 @@ class Player(Entity):
         self.rotate_increment = 0.5
         self.slow_rotation = self.rotate_increment / 2
 
+        self.lasers = SpriteGroup()
+
         # Draws an arrow facing in the direction of angle to serve as the ship
         size = self.image.get_size()
         arrow_points = [
@@ -31,6 +41,9 @@ class Player(Entity):
             (size[0] - 1, size[1] - 1)  # bottom right
         ]
         pygame.draw.lines(self.image, COLOR.WHITE, False, arrow_points, 1)
+
+    def fire(self):
+        pass
 
     def calc_rotation(self):
         """Calculates the next angle in the rotation"""
@@ -66,5 +79,7 @@ class Player(Entity):
             self.rotation_speed += self.rotate_increment
         if keys[pygame.K_UP]:
             self.velocity += self.acceleration
+        if keys[pygame.K_z]:
+            self.fire()
 
         Entity.update(self)

@@ -4,7 +4,7 @@ from types import SimpleNamespace
 
 from pygame import Surface
 from pygame.math import Vector2 as Vector
-from pygame.sprite import Sprite
+from pygame.sprite import Sprite, Group as SpriteGroup
 from pygame.transform import rotate
 
 FPS = 60
@@ -23,6 +23,9 @@ COLOR = SimpleNamespace(
 class Entity(Sprite):
     """Base class for all moving Entities"""
 
+    # Keep a group of all entities for the purpose of updating and drawing
+    group = SpriteGroup()
+
     def __init__(self, size=(1, 1), pos=(0, 0)):
         Sprite.__init__(self)
 
@@ -35,6 +38,8 @@ class Entity(Sprite):
         self.angle = 0
         self.rotation_speed = 0
         self.max_velocity = 10
+
+        Entity.group.add(self)
 
     def calc_position(self):
         """Calculates the next position based on velocity"""
