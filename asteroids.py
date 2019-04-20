@@ -5,7 +5,7 @@
 import pygame
 from pygame.locals import *
 
-from engine import Entity, COLOR, FPS
+from engine import Entity, COLOR, FPS, SCREEN_SIZE
 from player import Player
 
 
@@ -14,7 +14,7 @@ if __name__ == "__main__":
 
     clock = pygame.time.Clock()
 
-    screen = pygame.display.set_mode((500, 500))
+    screen = pygame.display.set_mode(SCREEN_SIZE)
     pygame.display.set_caption('Asteroids')
 
     # Define the background for drawing later
@@ -24,7 +24,7 @@ if __name__ == "__main__":
 
     entities = pygame.sprite.Group()
 
-    char = Player((250, 250))
+    char = Player()
     entities.add(char)
 
     # Event loop .

@@ -4,12 +4,13 @@ import pygame
 # from pygame.locals import *
 from pygame.math import Vector2 as Vector
 
-from engine import Entity, COLOR
+from engine import Entity, COLOR, SCREEN_WIDTH, SCREEN_HEIGHT
+
 
 class Player(Entity):
     """Entity for the player, controls all movement and shooting"""
 
-    def __init__(self, pos):
+    def __init__(self, pos=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)):
         Entity.__init__(self, (18, 18), pos)
 
         # Acceleration vector that will be rotated and added to velocity
