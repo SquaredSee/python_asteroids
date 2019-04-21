@@ -1,5 +1,7 @@
 """engine.py: Basic Entity movement and global constants"""
 
+import sys
+from os.path import join
 from types import SimpleNamespace
 
 from pygame import Surface
@@ -12,7 +14,13 @@ SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 600
 SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
 
-FONT_PATH = './data/PressStart2P-Regular.ttf'
+# if sys has _MEIPASS, this is a pyinstaller build so modify data paths
+if hasattr(sys, '_MEIPASS'):
+    DATA_PATH = join(sys._MEIPASS, 'data')
+else:
+    DATA_PATH = join('.', 'data')
+
+FONT_PATH = join(DATA_PATH, 'PressStart2P-Regular.ttf')
 
 # Use a SimpleNamespace to allow for COLOR.NAME accessing
 COLOR = SimpleNamespace(
