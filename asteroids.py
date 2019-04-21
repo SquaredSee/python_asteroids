@@ -11,7 +11,7 @@ from engine import Entity, COLOR, FPS, SCREEN_SIZE
 from player import Player
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     pygame.init()
 
     clock = pygame.time.Clock()
