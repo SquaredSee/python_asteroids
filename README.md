@@ -2,6 +2,12 @@
 
 A python implementation of asteroids written in pygame
 
+## Controls
+Left Arrow: Rotate left
+Right Arrow: Rotate Right
+Up Arrow: Move forward
+Z: Shoot
+
 ## Installation
 ### For [pipenv](https://pipenv.readthedocs.io/):
 ```bash
