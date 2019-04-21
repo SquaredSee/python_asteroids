@@ -13,6 +13,7 @@ FPS = 60
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 600
 SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
+SCREEN_CENTER = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
 # if sys has _MEIPASS, this is a pyinstaller build so modify data paths
 if hasattr(sys, '_MEIPASS'):
@@ -66,11 +67,6 @@ class Entity(Sprite):
     def calc_rotation(self):
         """Calculates the next angle in the rotation"""
         return self.angle + self.rotation_speed
-
-    def hit(self):
-        """Removes the Entity from sprite groups and deletes it"""
-        self.kill()
-        del self
 
     def move(self, pos=Vector(0, 0)):
         """Moves the position to the Vector2 given"""

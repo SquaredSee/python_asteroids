@@ -6,7 +6,7 @@ from pygame.key import get_pressed
 from pygame.math import Vector2 as Vector
 from pygame.sprite import Group as SpriteGroup
 
-from engine import Entity, COLOR, SCREEN_WIDTH, SCREEN_HEIGHT
+from engine import Entity, COLOR, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_CENTER
 
 
 class Laser(Entity):
@@ -29,13 +29,13 @@ class Laser(Entity):
         Entity.update(self)
         self.lifetime -= 1
         if self.lifetime <= 0:
-            self.hit()
+            self.kill()
 
 
 class Player(Entity):
     """Entity for the player, controls all movement and shooting"""
 
-    def __init__(self, pos=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)):
+    def __init__(self, pos=SCREEN_CENTER):
         Entity.__init__(self, (18, 18), pos)
 
         # Acceleration vector that will be rotated and added to velocity

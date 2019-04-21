@@ -45,7 +45,7 @@ class Asteroid(Entity):
 
         Asteroid.group.add(self)
 
-    def hit(self):
+    def kill(self):
         if self.tier > 1:
             # Spawn two new asteroids of a tier lower
             speed = self.velocity.length()
@@ -55,4 +55,4 @@ class Asteroid(Entity):
             asteroid1 = Asteroid(new_tier, speed, angle1, self.position)
             asteroid2 = Asteroid(new_tier, speed, angle2, self.position)
         Asteroid.number_destroyed += 1
-        Entity.hit(self)
+        Entity.kill(self)

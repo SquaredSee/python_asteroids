@@ -34,22 +34,16 @@ if __name__ == '__main__':
     test = Asteroid(3, angle=190)
 
     # Event loop
-    while True:
+    while player:
         for event in get_events():
             if event.type == QUIT:
                 raise SystemExit('Thanks for playing!')
 
-        laser_collisions = groupcollide(player.lasers, Asteroid.group, False, False, collide_circle)
-        for laser, asteroids in laser_collisions.items():
-            for asteroid in asteroids:
-                asteroid.hit()
-            laser.hit()
+        laser_collisions = groupcollide(player.lasers, Asteroid.group, True, True, collide_circle)
 
-        player_collisions = spritecollide(player, Asteroid.group, False, collide_circle)
+        player_collisions = spritecollide(player, Asteroid.group, True, collide_circle)
         if player_collisions:
-            for asteroid in player_collisions:
-                asteroid.hit()
-            player.hit()
+            player.kill()
 
         # Draw the background to the screen
         screen.blit(background, (0, 0))
