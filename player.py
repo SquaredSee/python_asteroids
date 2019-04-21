@@ -16,9 +16,7 @@ class Laser(Entity):
         # 60 frames = 1 second
         self.lifetime = 60
 
-        self.image.fill(COLOR.WHITE)
         self.orig_img.fill(COLOR.WHITE)
-        # pygame.draw.lines(self.image, COLOR.WHITE, False, [(0, 0), (4, 0)], 2)
 
         # angle 0 points right, so subtract 90 degrees
         angle = angle - 90
@@ -29,8 +27,7 @@ class Laser(Entity):
         Entity.update(self)
         self.lifetime -= 1
         if self.lifetime <= 0:
-            self.kill()
-            del self
+            self.hit()
 
 
 class Player(Entity):
@@ -65,6 +62,7 @@ class Player(Entity):
         pygame.draw.lines(self.image, COLOR.WHITE, False, arrow_points, 2)
 
     def fire(self):
+        """Fires a Laser Entity in the direction the ship is facing"""
         if self.fire_cooldown:
             self.fire_cooldown -= 1
         else:
@@ -87,7 +85,7 @@ class Player(Entity):
             friction = 0
         try:
             self.velocity.scale_to_length(friction)
-        except ValueError as _:
+        except ValueError:
             # Fixes vector scaling issues
             self.velocity = Vector()
         return Entity.calc_position(self)
