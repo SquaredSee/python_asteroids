@@ -1,7 +1,6 @@
-"""player.py"""
+"""player.py: Player and related Entities"""
 
 import pygame
-# from pygame.locals import *
 from pygame.math import Vector2 as Vector
 from pygame.sprite import Group as SpriteGroup
 
@@ -12,7 +11,26 @@ class Laser(Entity):
     """Entity for the projectiles the Player fires"""
 
     def __init__(self, pos=(0, 0), angle=0):
-        pass
+        Entity.__init__(self, (5, 2), pos)
+
+        # 60 frames = 1 second
+        self.lifetime = 60
+
+        self.image.fill(COLOR.WHITE)
+        self.orig_img.fill(COLOR.WHITE)
+        # pygame.draw.lines(self.image, COLOR.WHITE, False, [(0, 0), (4, 0)], 2)
+
+        # angle 0 points right, so subtract 90 degrees
+        angle = angle - 90
+        self.velocity.from_polar((self.max_velocity, angle))
+        self.rotate(angle)
+
+    def update(self):
+        Entity.update(self)
+        self.lifetime -= 1
+        if self.lifetime <= 0:
+            self.kill()
+            del self
 
 
 class Player(Entity):
@@ -31,6 +49,10 @@ class Player(Entity):
         self.rotate_increment = 0.5
         self.slow_rotation = self.rotate_increment / 2
 
+        # 10 frame cooldown, start at 0
+        self.fire_cooldown = 0
+
+        # Group of all lasers for collision purposes
         self.lasers = SpriteGroup()
 
         # Draws an arrow facing in the direction of angle to serve as the ship
@@ -40,10 +62,14 @@ class Player(Entity):
             ((size[0] - 1) / 2, 0),  # top middle
             (size[0] - 1, size[1] - 1)  # bottom right
         ]
-        pygame.draw.lines(self.image, COLOR.WHITE, False, arrow_points, 1)
+        pygame.draw.lines(self.image, COLOR.WHITE, False, arrow_points, 2)
 
     def fire(self):
-        pass
+        if self.fire_cooldown:
+            self.fire_cooldown -= 1
+        else:
+            self.lasers.add(Laser(self.position, self.angle))
+            self.fire_cooldown = 10
 
     def calc_rotation(self):
         """Calculates the next angle in the rotation"""
