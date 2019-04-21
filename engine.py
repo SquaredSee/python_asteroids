@@ -52,6 +52,11 @@ class Entity(Sprite):
         """Calculates the next angle in the rotation"""
         return self.angle + self.rotation_speed
 
+    def hit(self):
+        """Removes the Entity from sprite groups and deletes it"""
+        self.kill()
+        del self
+
     def move(self, pos=Vector(0, 0)):
         """Moves the position to the Vector2 given"""
         # Wrap around the screen
