@@ -29,6 +29,9 @@ class Entity(Sprite):
     def __init__(self, size=(1, 1), pos=(0, 0)):
         Sprite.__init__(self)
 
+        # Radius attribute for collision detection, circle centered on pos
+        self.radius = size[0] / 2
+
         self.image = Surface(size).convert()
         self.orig_img = self.image
         self.rect = self.image.get_rect(center=pos)
