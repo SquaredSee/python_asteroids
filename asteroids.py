@@ -3,8 +3,9 @@
 """asteroids.py: A Python implementation of the Asteroids arcade game written in pygame."""
 
 import pygame
-from pygame.locals import *
+from pygame.locals import QUIT
 
+from enemy import Asteroid
 from engine import Entity, COLOR, FPS, SCREEN_SIZE
 from player import Player
 
