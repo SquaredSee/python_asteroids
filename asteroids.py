@@ -4,6 +4,7 @@
 
 import pygame
 from pygame.locals import QUIT
+from pygame.sprite import groupcollide, spritecollide
 
 from enemy import Asteroid
 from engine import Entity, COLOR, FPS, SCREEN_SIZE
@@ -25,13 +26,25 @@ if __name__ == "__main__":
 
     player = Player()
 
-    test = Asteroid(3, angle=66)
+    test = Asteroid(3, angle=190)
 
     # Event loop
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
                 raise SystemExit('Thanks for playing!')
+
+        laser_collisions = groupcollide(player.lasers, Asteroid.group, False, False)
+        for laser, asteroids in laser_collisions.items():
+            for asteroid in asteroids:
+                asteroid.hit()
+            laser.hit()
+
+        player_collisions = spritecollide(player, Asteroid.group, False)
+        if player_collisions:
+            for asteroid in player_collisions:
+                asteroid.hit()
+            player.hit()
 
         # Draw the background to the screen
         screen.blit(background, (0, 0))
