@@ -16,9 +16,8 @@ FONT_PATH = './data/PressStart2P-Regular.ttf'
 
 # Use a SimpleNamespace to allow for COLOR.NAME accessing
 COLOR = SimpleNamespace(
-    BLACK=(0, 0, 0, 255),
-    WHITE=(255, 255, 255, 255),
-    CLEAR=(0, 0, 0, 0)
+    BLACK=(0, 0, 0),
+    WHITE=(255, 255, 255)
 )
 
 
