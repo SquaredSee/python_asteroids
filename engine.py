@@ -12,6 +12,8 @@ SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 600
 SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
 
+FONT_PATH = './data/PressStart2P-Regular.ttf'
+
 # Use a SimpleNamespace to allow for COLOR.NAME accessing
 COLOR = SimpleNamespace(
     BLACK=(0, 0, 0, 255),

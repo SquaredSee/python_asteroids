@@ -10,7 +10,7 @@ from pygame.sprite import collide_circle, groupcollide, spritecollide
 from pygame.time import Clock
 
 from enemy import Asteroid
-from engine import Entity, COLOR, FPS, SCREEN_SIZE
+from engine import Entity, COLOR, FPS, SCREEN_SIZE, FONT_PATH
 from player import Player
 
 
@@ -26,6 +26,8 @@ if __name__ == '__main__':
     background = Surface(screen.get_size())
     background = background.convert()
     background.fill(COLOR.BLACK)
+
+    font = Font(FONT_PATH, 36)
 
     player = Player()
 
@@ -52,7 +54,7 @@ if __name__ == '__main__':
         # Draw the background to the screen
         screen.blit(background, (0, 0))
 
-        font = Font('./data/PressStart2P-Regular.ttf', 36)
+        # Draw score in top left
         text = font.render(str(Asteroid.number_destroyed), 1, COLOR.WHITE)
         screen.blit(text, (10, 10))
 
