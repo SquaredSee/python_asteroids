@@ -25,7 +25,6 @@ class Asteroid(Entity):
         self.spread = 20
 
         self.image.fill(COLOR.WHITE)
-        self.test = 120
 
         Asteroid.group.add(self)
 
