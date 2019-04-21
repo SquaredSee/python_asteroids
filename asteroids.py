@@ -25,6 +25,8 @@ if __name__ == "__main__":
 
     player = Player()
 
+    test = Asteroid(3, angle=66)
+
     # Event loop
     while True:
         for event in pygame.event.get():
