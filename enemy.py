@@ -26,8 +26,6 @@ class Asteroid(Entity):
 
         self.image.fill(COLOR.WHITE)
 
-        self.test = 90
-
         Asteroid.group.add(self)
 
     def hit(self):
@@ -40,10 +38,3 @@ class Asteroid(Entity):
             asteroid2 = Asteroid(self.tier - 1, speed, angle2, self.position)
 
         Entity.hit(self)
-
-    def update(self):
-        if self.test > 0:
-            self.test -= 1
-        else:
-            self.hit()
-        Entity.update(self)
