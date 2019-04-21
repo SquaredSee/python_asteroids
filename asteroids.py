@@ -27,6 +27,12 @@ if __name__ == '__main__':
     background = background.convert()
     background.fill(COLOR.BLACK)
 
+    font = Font('./data/PressStart2P-Regular.ttf', 36)
+    text = font.render('THIS IS A TEST', 1, COLOR.WHITE)
+    textpos = text.get_rect()
+    textpos.centerx = background.get_rect().centerx
+    background.blit(text, textpos)
+
     player = Player()
 
     test = Asteroid(3, angle=190)
