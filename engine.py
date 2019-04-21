@@ -68,7 +68,7 @@ class Entity(Sprite):
         self.rect.center = self.position
 
     def rotate(self, angle=0):
-        """Rotates the acceleration vector and the sprite image"""
+        """Rotates the angle and the sprite image"""
         # Normalize angle into 360 deg
         if angle > 360:
             angle -= 360
