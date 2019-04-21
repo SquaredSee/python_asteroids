@@ -1,9 +1,11 @@
 """enemy.py: Asteroids and other enemy Entities"""
 
+from pygame.draw import polygon
 from pygame.math import Vector2 as Vector
 from pygame.sprite import Group as SpriteGroup
 
 from engine import Entity, COLOR
+
 
 class Asteroid(Entity):
     """Standard Asteroid Entity"""
@@ -12,7 +14,7 @@ class Asteroid(Entity):
 
     def __init__(self, tier=1, speed=3, angle=0, pos=(0, 0)):
         # Tier determines the size, and how many times it breaks apart
-        size = (tier * 10, tier * 10)
+        size = (tier * 15, tier * 15)
         Entity.__init__(self, size, pos)
 
         self.tier = tier
@@ -24,7 +26,20 @@ class Asteroid(Entity):
         # The angle spread of the children when the asteroid breaks apart
         self.spread = 20
 
-        self.image.fill(COLOR.WHITE)
+        first = (size[0] - 1) / 3
+        second = first * 2
+        third = first * 3
+        octagon = [
+            (first, 0),  # top 1
+            (second, 0),  # top 2
+            (third, first),  # right 1
+            (third, second),  # right 2
+            (second, third),  # bottom 1
+            (first, third),  # bottom 2
+            (0, second),  # left 1
+            (0, first)  # left 2
+        ]
+        polygon(self.image, COLOR.WHITE, octagon, 2)
 
         Asteroid.group.add(self)
 
@@ -32,9 +47,10 @@ class Asteroid(Entity):
         if self.tier > 1:
             # Spawn two new asteroids of a tier lower
             (speed, _) = self.velocity.as_polar()
+            new_tier = self.tier - 1
             angle1 = self.angle - self.spread
             angle2 = self.angle + self.spread
-            asteroid1 = Asteroid(self.tier - 1, speed, angle1, self.position)
-            asteroid2 = Asteroid(self.tier - 1, speed, angle2, self.position)
+            asteroid1 = Asteroid(new_tier, speed, angle1, self.position)
+            asteroid2 = Asteroid(new_tier, speed, angle2, self.position)
 
         Entity.hit(self)

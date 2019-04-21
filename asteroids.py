@@ -3,7 +3,7 @@
 """asteroids.py: A Python implementation of the Asteroids arcade game written in pygame."""
 
 import pygame
-from pygame.locals import QUIT
+from pygame.locals import HWSURFACE, QUIT
 from pygame.sprite import collide_circle, groupcollide, spritecollide
 
 from enemy import Asteroid
@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
     clock = pygame.time.Clock()
 
-    screen = pygame.display.set_mode(SCREEN_SIZE)
+    screen = pygame.display.set_mode(SCREEN_SIZE, HWSURFACE)
     pygame.display.set_caption('Python Asteroids')
 
     # Define the background for drawing

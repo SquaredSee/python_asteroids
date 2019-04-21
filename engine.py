@@ -14,9 +14,9 @@ SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
 
 # Use a SimpleNamespace to allow for COLOR.NAME accessing
 COLOR = SimpleNamespace(
-    BLACK=(0, 0, 0),
-    WHITE=(255, 255, 255),
-    GREY=(50, 50, 50)
+    BLACK=(0, 0, 0, 255),
+    WHITE=(255, 255, 255, 255),
+    CLEAR=(0, 0, 0, 0)
 )
 
 
@@ -33,7 +33,10 @@ class Entity(Sprite):
         self.radius = size[0] / 2
 
         self.image = Surface(size).convert()
-        self.orig_img = self.image
+        self.image.set_colorkey(COLOR.BLACK)  # set black as transparency color
+
+        self.orig_img = self.image  # Keep an original copy for rotation purposes
+
         self.rect = self.image.get_rect(center=pos)
 
         self.position = Vector(pos)
