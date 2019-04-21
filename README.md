@@ -8,7 +8,10 @@ A python implementation of asteroids written in pygame
 * Up Arrow: Move forward
 * Z: Shoot
 
-## Installation
+## Download Game
+[Link to download](https://github.com/SquaredSee/python_asteroids/releases)
+
+## Source Code Installation
 ### For [pipenv](https://pipenv.readthedocs.io/):
 ```bash
 pipenv install
