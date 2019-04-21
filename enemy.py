@@ -1,4 +1,4 @@
-"""player.py: Asteroids and other enemy Entities"""
+"""enemy.py: Asteroids and other enemy Entities"""
 
 from pygame.math import Vector2 as Vector
 from pygame.sprite import Group as SpriteGroup
