@@ -2,9 +2,12 @@
 
 """asteroids.py: A Python implementation of the Asteroids arcade game written in pygame."""
 
-import pygame
+from pygame import Surface, display, init
+from pygame.event import get as get_events
+from pygame.font import Font
 from pygame.locals import HWSURFACE, QUIT
 from pygame.sprite import collide_circle, groupcollide, spritecollide
+from pygame.time import Clock
 
 from enemy import Asteroid
 from engine import Entity, COLOR, FPS, SCREEN_SIZE
@@ -12,15 +15,15 @@ from player import Player
 
 
 if __name__ == '__main__':
-    pygame.init()
+    init()
 
-    clock = pygame.time.Clock()
+    clock = Clock()
 
-    screen = pygame.display.set_mode(SCREEN_SIZE, HWSURFACE)
-    pygame.display.set_caption('Python Asteroids')
+    screen = display.set_mode(SCREEN_SIZE, HWSURFACE)
+    display.set_caption('Python Asteroids')
 
     # Define the background for drawing
-    background = pygame.Surface(screen.get_size())
+    background = Surface(screen.get_size())
     background = background.convert()
     background.fill(COLOR.BLACK)
 
@@ -30,7 +33,7 @@ if __name__ == '__main__':
 
     # Event loop
     while True:
-        for event in pygame.event.get():
+        for event in get_events():
             if event.type == QUIT:
                 raise SystemExit('Thanks for playing!')
 
@@ -54,7 +57,7 @@ if __name__ == '__main__':
         Entity.group.draw(screen)
 
         # Display what has been drawn
-        pygame.display.update()
+        display.update()
 
         # Advance the clock
         clock.tick(FPS)

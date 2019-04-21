@@ -1,6 +1,6 @@
 """enemy.py: Asteroids and other enemy Entities"""
 
-from pygame.draw import polygon
+from pygame.draw import polygon as draw_polygon
 from pygame.math import Vector2 as Vector
 from pygame.sprite import Group as SpriteGroup
 
@@ -39,7 +39,7 @@ class Asteroid(Entity):
             (0, second),  # left 1
             (0, first)  # left 2
         ]
-        polygon(self.image, COLOR.WHITE, octagon, 2)
+        draw_polygon(self.image, COLOR.WHITE, octagon, 2)
 
         Asteroid.group.add(self)
 

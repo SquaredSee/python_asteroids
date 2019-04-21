@@ -1,6 +1,8 @@
 """player.py: Player and related Entities"""
 
-import pygame
+from pygame import K_UP, K_LEFT, K_RIGHT, K_z
+from pygame.draw import lines as draw_lines
+from pygame.key import get_pressed
 from pygame.math import Vector2 as Vector
 from pygame.sprite import Group as SpriteGroup
 
@@ -59,7 +61,7 @@ class Player(Entity):
             ((size[0] - 1) / 2, 0),  # top middle
             (size[0] - 1, size[1] - 1)  # bottom right
         ]
-        pygame.draw.lines(self.image, COLOR.WHITE, False, arrow_points, 2)
+        draw_lines(self.image, COLOR.WHITE, False, arrow_points, 2)
 
     def fire(self):
         """Fires a Laser Entity in the direction the ship is facing"""
@@ -95,15 +97,15 @@ class Player(Entity):
         Entity.rotate(self, angle)
 
     def update(self):
-        keys = pygame.key.get_pressed()
+        keys = get_pressed()
 
-        if keys[pygame.K_LEFT]:
+        if keys[K_LEFT]:
             self.rotation_speed -= self.rotate_increment
-        if keys[pygame.K_RIGHT]:
+        if keys[K_RIGHT]:
             self.rotation_speed += self.rotate_increment
-        if keys[pygame.K_UP]:
+        if keys[K_UP]:
             self.velocity += self.acceleration
-        if keys[pygame.K_z]:
+        if keys[K_z]:
             self.fire()
 
         Entity.update(self)
