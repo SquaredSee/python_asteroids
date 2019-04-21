@@ -6,7 +6,7 @@ from pygame.key import get_pressed
 from pygame.math import Vector2 as Vector
 from pygame.sprite import Group as SpriteGroup
 
-from engine import Entity, COLOR, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_CENTER
+from engine import Entity, COLOR, SCREEN_CENTER
 
 
 class Laser(Entity):
@@ -70,6 +70,10 @@ class Player(Entity):
         else:
             self.lasers.add(Laser(self.position, self.angle))
             self.fire_cooldown = 10
+
+    def kill(self):
+        self.lasers.empty()
+        Entity.kill(self)
 
     def calc_rotation(self):
         """Calculates the next angle in the rotation"""

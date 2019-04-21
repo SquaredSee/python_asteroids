@@ -22,6 +22,7 @@ else:
     DATA_PATH = join('.', 'data')
 
 FONT_PATH = join(DATA_PATH, 'PressStart2P-Regular.ttf')
+FONT_SIZE = 36
 
 # Use a SimpleNamespace to allow for COLOR.NAME accessing
 COLOR = SimpleNamespace(
