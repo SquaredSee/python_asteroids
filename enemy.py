@@ -48,7 +48,7 @@ class Asteroid(Entity):
     def hit(self):
         if self.tier > 1:
             # Spawn two new asteroids of a tier lower
-            (speed, _) = self.velocity.as_polar()
+            speed = self.velocity.length()
             new_tier = self.tier - 1
             angle1 = self.angle - self.spread
             angle2 = self.angle + self.spread
