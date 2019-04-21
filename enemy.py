@@ -12,6 +12,8 @@ class Asteroid(Entity):
 
     group = SpriteGroup()
 
+    number_destroyed = 0
+
     def __init__(self, tier=1, speed=3, angle=0, pos=(0, 0)):
         # Tier determines the size, and how many times it breaks apart
         size = (tier * 15, tier * 15)
@@ -52,5 +54,5 @@ class Asteroid(Entity):
             angle2 = self.angle + self.spread
             asteroid1 = Asteroid(new_tier, speed, angle1, self.position)
             asteroid2 = Asteroid(new_tier, speed, angle2, self.position)
-
+        Asteroid.number_destroyed += 1
         Entity.hit(self)
