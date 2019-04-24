@@ -46,6 +46,7 @@ def main():
 
             player_collide = spritecollide(player, Asteroid.group, True, collide_circle)
             if player_collide:
+                Asteroid.number_destroyed -= 1
                 player.kill()
                 player = None
 
@@ -143,6 +144,10 @@ def main():
                 return True
 
             screen.blit(background, (0, 0))
+
+            # Draw score in top left
+            text = font.render(str(Asteroid.number_destroyed), 1, COLOR.WHITE)
+            screen.blit(text, (10, 10))
 
             screen.blit(text1, textpos1)
             screen.blit(text2, textpos2)
