@@ -2,6 +2,8 @@
 
 """asteroids.py: A Python implementation of the Asteroids arcade game written in pygame."""
 
+from random import randrange
+
 from pygame import Surface, display, init
 from pygame.event import get as get_events
 from pygame.font import Font
@@ -11,7 +13,8 @@ from pygame.sprite import collide_circle, groupcollide, spritecollide
 from pygame.time import Clock
 
 from enemy import Asteroid
-from engine import Entity, COLOR, FPS, FONT_PATH, FONT_SIZE, SCREEN_SIZE, SCREEN_CENTER
+from engine import Entity, COLOR, FPS, FONT_PATH, FONT_SIZE, \
+    SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_SIZE, SCREEN_CENTER
 from player import Player
 
 
@@ -33,7 +36,7 @@ def main():
     def game_loop():
         """Internal game loop function that has access to clock, screen, etc."""
         player = Player()
-        test = Asteroid(3, angle=190)
+        asteroid_cooldown = 0
         while player:
             for event in get_events():
                 if event.type == QUIT:
@@ -45,6 +48,31 @@ def main():
             if player_collide:
                 player.kill()
                 player = None
+
+            if asteroid_cooldown <= 0:
+                # Spawn a new asteroid at a random point on the
+                # border of the screen, at a random angle and speed
+                x = 0
+                y = 0
+                side = randrange(1, 4)
+                if side == 1:
+                    x = 0
+                    y = randrange(0, SCREEN_HEIGHT)
+                if side == 2:
+                    x = randrange(0, SCREEN_WIDTH)
+                    y = 0
+                if side == 3:
+                    x = SCREEN_WIDTH
+                    y = randrange(0, SCREEN_HEIGHT)
+                if side == 4:
+                    x = randrange(0, SCREEN_WIDTH)
+                    y = SCREEN_HEIGHT
+
+                angle = randrange(0, 360)
+                speed = randrange(1, 5)
+
+                asteroid = Asteroid(3, speed, angle, pos=(x, y))
+                asteroid_cooldown = 450
 
             # Draw the background to the screen
             screen.blit(background, (0, 0))
@@ -59,6 +87,8 @@ def main():
 
             # Display what has been drawn
             display.update()
+
+            asteroid_cooldown -= 1
 
             # Advance the clock
             clock.tick(FPS)
