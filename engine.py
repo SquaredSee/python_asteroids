@@ -55,6 +55,7 @@ class Entity(Sprite):
         self.angle = 0
         self.rotation_speed = 0
         self.max_velocity = 10
+        self.max_rotation = 10
 
         Entity.group.add(self)
 
@@ -67,6 +68,10 @@ class Entity(Sprite):
 
     def calc_rotation(self):
         """Calculates the next angle in the rotation"""
+        if self.rotation_speed > self.max_rotation:
+            self.rotation_speed = self.max_rotation
+        if self.rotation_speed < -self.max_rotation:
+            self.rotation_speed = -self.max_rotation
         return self.angle + self.rotation_speed
 
     def move(self, pos=Vector(0, 0)):
