@@ -9,7 +9,7 @@ A python implementation of asteroids written in pygame
 * Z: Shoot
 
 ## Download Game
-[Link to download](https://github.com/SquaredSee/python_asteroids/releases)
+[Link to download](https://github.com/SquaredSee/python_asteroids/releases/latest)
 
 ## Source Code Installation
 ### For [pipenv](https://pipenv.readthedocs.io/):
